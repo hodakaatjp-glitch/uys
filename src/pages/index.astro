@@ -8,6 +8,35 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 ---
 
 <BaseLayout title="uys.">
+	<div class="hero-image" aria-hidden="true">
+		<svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+					<stop offset="0%" stop-color="var(--accent-soft)" />
+					<stop offset="100%" stop-color="var(--surface)" />
+				</linearGradient>
+			</defs>
+			<rect width="800" height="300" fill="url(#sky)" />
+			<circle cx="585" cy="98" r="52" fill="var(--accent)" opacity="0.85" />
+			<path
+				d="M0,192 C120,142 220,152 300,172 C400,197 460,150 560,140 C650,132 730,162 800,150 L800,300 L0,300 Z"
+				fill="var(--ink-soft)"
+				opacity="0.16"
+			/>
+			<path
+				d="M0,232 C100,192 220,222 320,206 C430,188 520,226 620,210 C700,198 760,216 800,206 L800,300 L0,300 Z"
+				fill="var(--ink-soft)"
+				opacity="0.3"
+			/>
+			<g fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" opacity="0.55">
+				<path d="M130,282 C110,255 150,235 130,205 C112,178 148,160 132,132" />
+				<path d="M300,286 C280,260 320,240 300,212 C282,186 318,168 302,140" />
+				<path d="M470,282 C450,255 490,235 470,205 C452,178 488,160 472,132" />
+				<path d="M660,286 C640,260 680,240 660,212 C642,186 678,168 662,140" />
+			</g>
+		</svg>
+	</div>
+
 	<section class="hero">
 		<span class="eyebrow">MARKETING NOTES</span>
 		<h1>限られた予算と人手でも、<br />お客さんに届く発信を。</h1>
@@ -40,6 +69,19 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 </BaseLayout>
 
 <style>
+	.hero-image {
+		border-radius: var(--radius);
+		overflow: hidden;
+		box-shadow: var(--shadow);
+		margin-bottom: 40px;
+		aspect-ratio: 800 / 300;
+	}
+	.hero-image svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
 	.hero {
 		padding: 8px 0 48px;
 		border-bottom: 1px solid var(--hairline);
