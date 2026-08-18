@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog', ({ data }) => !data.draft);
+	return posts.map((post) => ({
+		params: { id: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+	<article>
+		<h1>{post.data.title}</h1>
+		<p style="color: #b4b3a8; font-size: 13px;">
+			{post.data.pubDate.toLocaleDateString('ja-JP')}
+			{post.data.tags.length > 0 && <span> ・ {post.data.tags.join(' / ')}</span>}
+		</p>
+		<Content />
+	</article>
+	<p><a href={import.meta.env.BASE_URL}>&larr; 記事一覧に戻る</a></p>
+</BaseLayout>

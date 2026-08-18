@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="uys.">
+	<h1>uys.</h1>
+	<p>中小の飲食店・温泉施設が、限られた予算と人手でも実践できる集客・マーケティングの情報を発信しています。</p>
+
+	<ul style="list-style: none; padding: 0;">
+		{posts.map((post) => (
+			<li style="margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #e4e3dc;">
+				<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`} style="font-size: 18px; font-weight: 700; text-decoration: none;">
+					{post.data.title}
+				</a>
+				<p style="color: #6b6a63; margin: 6px 0 0;">{post.data.description}</p>
+				<p style="color: #b4b3a8; font-size: 13px; margin: 4px 0 0;">
+					{post.data.pubDate.toLocaleDateString('ja-JP')}
+				</p>
+			</li>
+		))}
+	</ul>
+
+	{posts.length === 0 && <p>まだ記事がありません。近日公開予定です。</p>}
+</BaseLayout>
