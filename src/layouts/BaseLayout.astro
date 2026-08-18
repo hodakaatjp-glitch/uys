@@ -60,12 +60,18 @@ const { title, description = 'uys. — 中小の飲食店・温泉施設のた�
 				top: 0;
 				z-index: 10;
 				display: flex;
-				align-items: baseline;
+				align-items: center;
+				justify-content: space-between;
 				gap: 14px;
-				padding: 22px 24px;
+				padding: 20px 24px;
 				background: color-mix(in srgb, var(--bg) 88%, transparent);
 				backdrop-filter: blur(10px);
 				border-bottom: 1px solid var(--hairline);
+			}
+			header .brand {
+				display: flex;
+				align-items: baseline;
+				gap: 14px;
 			}
 			header .logo {
 				color: var(--ink);
@@ -79,6 +85,29 @@ const { title, description = 'uys. — 中小の飲食店・温泉施設のた�
 				color: var(--ink-soft);
 				font-size: 13px;
 				letter-spacing: 0.02em;
+			}
+			header nav {
+				display: flex;
+				gap: 22px;
+			}
+			header nav a {
+				color: var(--ink-soft);
+				text-decoration: none;
+				font-size: 14px;
+				font-weight: 500;
+			}
+			header nav a:hover { color: var(--accent); }
+			header nav a.cta {
+				color: var(--accent-ink);
+				background: var(--accent);
+				padding: 8px 16px;
+				border-radius: 999px;
+				font-weight: 700;
+			}
+
+			@media (max-width: 640px) {
+				header .tagline { display: none; }
+				header nav { gap: 14px; }
 			}
 
 			main {
@@ -104,8 +133,14 @@ const { title, description = 'uys. — 中小の飲食店・温泉施設のた�
 	</head>
 	<body>
 		<header>
-			<a class="logo" href={import.meta.env.BASE_URL}>uys.</a>
-			<span class="tagline">中小飲食店・温泉施設のための集客メディア</span>
+			<div class="brand">
+				<a class="logo" href={import.meta.env.BASE_URL}>uys.</a>
+				<span class="tagline">中小飲食店・温泉施設のための集客メディア</span>
+			</div>
+			<nav>
+				<a href={`${import.meta.env.BASE_URL}profile/`}>プロフィール</a>
+				<a class="cta" href={`${import.meta.env.BASE_URL}contact/`}>お仕事のご相談</a>
+			</nav>
 		</header>
 		<main>
 			<slot />

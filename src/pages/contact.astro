@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const CONTACT_EMAIL = 'hodaka.at.jp+uys@gmail.com';
+
+const services = [
+	{
+		title: 'SNS運用代行',
+		desc: 'Instagram・Xなどの投稿企画・作成・運用を代行します。',
+	},
+	{
+		title: 'SEO・MEOの設定アドバイス',
+		desc: 'Googleビジネスプロフィールなど、検索・地図からの集客の土台づくりをサポートします。',
+	},
+	{
+		title: 'スタッフ教育',
+		desc: '接客・ホスピタリティの現場研修を行います。',
+	},
+	{
+		title: 'ホスピタリティ支援',
+		desc: '現場運営・お客様対応の視点から、店舗運営のアドバイスを行います。',
+	},
+];
+---
+
+<BaseLayout title="お仕事のご相談" description="uys. への仕事のご相談・お問い合わせはこちらから。">
+	<span class="eyebrow">WORK WITH US</span>
+	<h1>お仕事のご相談</h1>
+	<p class="lead">
+		中小の飲食店・温泉施設向けに、集客・マーケティング・スタッフ教育の支援を行っています。
+	</p>
+
+	<ul class="services">
+		{services.map((s) => (
+			<li>
+				<h2>{s.title}</h2>
+				<p>{s.desc}</p>
+			</li>
+		))}
+	</ul>
+
+	<div class="cta-box">
+		<p class="free-badge">初回相談無料</p>
+		<p>
+			まずはお気軽にメールでご相談ください。内容を確認のうえ、こちらからご連絡いたします。
+		</p>
+		<a class="mail-button" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('お仕事のご相談')}`}>
+			{CONTACT_EMAIL}
+		</a>
+	</div>
+</BaseLayout>
+
+<style>
+	.eyebrow {
+		display: block;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		color: var(--accent);
+		margin-bottom: 14px;
+	}
+	h1 {
+		font-family: var(--serif);
+		font-size: clamp(30px, 4.4vw, 40px);
+		font-weight: 800;
+		margin: 0 0 16px;
+	}
+	.lead {
+		font-size: 17px;
+		color: var(--ink-soft);
+		max-width: 52ch;
+		margin: 0 0 44px;
+	}
+
+	.services {
+		list-style: none;
+		margin: 0 0 48px;
+		padding: 0;
+		display: grid;
+		gap: 16px;
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.services li {
+		background: var(--surface);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow);
+		padding: 24px;
+	}
+	.services h2 {
+		font-family: var(--serif);
+		font-size: 18px;
+		font-weight: 700;
+		margin: 0 0 8px;
+	}
+	.services p {
+		margin: 0;
+		font-size: 14.5px;
+		color: var(--ink-soft);
+		line-height: 1.75;
+	}
+
+	.cta-box {
+		background: var(--accent-soft);
+		border-radius: var(--radius);
+		padding: 36px;
+		text-align: center;
+	}
+	.free-badge {
+		display: inline-block;
+		background: var(--accent);
+		color: var(--accent-ink);
+		font-size: 13px;
+		font-weight: 700;
+		padding: 6px 16px;
+		border-radius: 999px;
+		margin: 0 0 18px;
+	}
+	.cta-box p:not(.free-badge) {
+		margin: 0 0 22px;
+		color: var(--ink-soft);
+	}
+	.mail-button {
+		display: inline-block;
+		background: var(--accent);
+		color: var(--accent-ink);
+		text-decoration: none;
+		font-weight: 700;
+		padding: 14px 28px;
+		border-radius: 999px;
+		font-size: 15px;
+	}
+
+	@media (max-width: 560px) {
+		.services { grid-template-columns: 1fr; }
+		.cta-box { padding: 28px 22px; }
+	}
+</style>

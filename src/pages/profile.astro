@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="プロフィール" description="uys. を運営する hodaka のプロフィール。">
+	<div class="badge" aria-hidden="true">u.</div>
+	<span class="eyebrow">PROFILE</span>
+	<h1>hodaka</h1>
+	<p class="lead">長野県在住。屋号「uys.」で、飲食店・温泉施設向けのマーケティング支援を行っています。</p>
+
+	<div class="body">
+		<p>
+			東京ディズニーリゾートを運営するオリエンタルランドで、サービスの基礎を学びました。
+		</p>
+		<p>
+			その後、東京・千葉県内のカフェの開業に携わり、店長・マネージャー職を経験。接客、スタッフ教育、店舗運営を一通り担当してきました。
+		</p>
+		<p>
+			長野県に移住してからは、県内の温泉施設・カフェでマーケティング業務を担当。現場に立ちながら、SNS運用や集客の仕組みづくり、スタッフ教育に携わっています。
+		</p>
+		<p>
+			大きな広告予算や専任のマーケティング担当がいなくても、日々の接客とちょっとした工夫の積み重ねでお客さんに届く発信はできる — というのが、このメディアと仕事の根っこにある考え方です。
+		</p>
+	</div>
+
+	<a class="cta-link" href={`${import.meta.env.BASE_URL}contact/`}>お仕事のご相談はこちら &rarr;</a>
+</BaseLayout>
+
+<style>
+	.badge {
+		width: 56px;
+		height: 56px;
+		border-radius: 50%;
+		background: var(--accent);
+		color: var(--accent-ink);
+		font-family: var(--serif);
+		font-size: 22px;
+		font-weight: 800;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 24px;
+	}
+	.eyebrow {
+		display: block;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		color: var(--accent);
+		margin-bottom: 14px;
+	}
+	h1 {
+		font-family: var(--serif);
+		font-size: clamp(30px, 4.4vw, 40px);
+		font-weight: 800;
+		margin: 0 0 16px;
+	}
+	.lead {
+		font-size: 17px;
+		color: var(--ink-soft);
+		max-width: 50ch;
+		margin: 0 0 40px;
+	}
+	.body {
+		max-width: 640px;
+		font-size: 16px;
+		line-height: 1.95;
+		padding-bottom: 40px;
+		border-bottom: 1px solid var(--hairline);
+	}
+	.body p { margin: 0 0 1.5em; }
+
+	.cta-link {
+		display: inline-block;
+		margin-top: 32px;
+		font-weight: 700;
+		text-decoration: none;
+		color: var(--accent);
+	}
+</style>
