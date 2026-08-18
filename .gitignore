@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# 承認待ちの記事ドラフト(公開前は非公開のローカル保管)
+.drafts/
