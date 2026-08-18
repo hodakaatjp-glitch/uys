@@ -15,13 +15,123 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-	<article>
-		<h1>{post.data.title}</h1>
-		<p style="color: #b4b3a8; font-size: 13px;">
-			{post.data.pubDate.toLocaleDateString('ja-JP')}
-			{post.data.tags.length > 0 && <span> ・ {post.data.tags.join(' / ')}</span>}
+	<a class="back" href={import.meta.env.BASE_URL}>&larr; 記事一覧</a>
+
+	<article class="prose">
+		<p class="meta">
+			{post.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
 		</p>
-		<Content />
+		<h1>{post.data.title}</h1>
+		{post.data.tags.length > 0 && (
+			<p class="tags">
+				{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+			</p>
+		)}
+		<div class="body">
+			<Content />
+		</div>
 	</article>
-	<p><a href={import.meta.env.BASE_URL}>&larr; 記事一覧に戻る</a></p>
+
+	<a class="back back-bottom" href={import.meta.env.BASE_URL}>&larr; 記事一覧に戻る</a>
 </BaseLayout>
+
+<style>
+	.back {
+		display: inline-block;
+		font-size: 13px;
+		font-weight: 700;
+		color: var(--ink-soft);
+		text-decoration: none;
+		margin-bottom: 28px;
+	}
+	.back:hover { color: var(--accent); }
+	.back-bottom {
+		margin-top: 48px;
+		padding-top: 24px;
+		border-top: 1px solid var(--hairline);
+		display: block;
+	}
+
+	.prose { max-width: 680px; }
+
+	.meta {
+		margin: 0 0 14px;
+		font-size: 13px;
+		color: var(--ink-faint);
+		letter-spacing: 0.02em;
+	}
+
+	.prose h1 {
+		font-family: var(--serif);
+		font-size: clamp(26px, 4vw, 36px);
+		line-height: 1.5;
+		font-weight: 800;
+		margin: 0 0 18px;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin: 0 0 36px;
+	}
+	.tag {
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--accent);
+		background: var(--accent-soft);
+		padding: 4px 11px;
+		border-radius: 999px;
+	}
+
+	.body {
+		font-size: 16.5px;
+		line-height: 1.95;
+		color: var(--ink);
+	}
+	.body :global(p) {
+		margin: 0 0 1.5em;
+	}
+	.body :global(h2) {
+		font-family: var(--serif);
+		font-size: 22px;
+		font-weight: 700;
+		margin: 2.2em 0 0.9em;
+		padding-left: 14px;
+		border-left: 4px solid var(--accent);
+	}
+	.body :global(h3) {
+		font-size: 18px;
+		font-weight: 700;
+		margin: 1.8em 0 0.8em;
+	}
+	.body :global(ul),
+	.body :global(ol) {
+		margin: 0 0 1.5em;
+		padding-left: 1.3em;
+	}
+	.body :global(li) {
+		margin-bottom: 0.6em;
+	}
+	.body :global(li strong),
+	.body :global(p strong) {
+		color: var(--ink);
+	}
+	.body :global(a) {
+		color: var(--accent);
+		text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+		text-underline-offset: 3px;
+	}
+	.body :global(blockquote) {
+		margin: 0 0 1.5em;
+		padding: 4px 20px;
+		border-left: 3px solid var(--hairline);
+		color: var(--ink-soft);
+	}
+	.body :global(code) {
+		background: var(--accent-soft);
+		padding: 0.15em 0.4em;
+		border-radius: 6px;
+		font-size: 0.9em;
+	}
+</style>

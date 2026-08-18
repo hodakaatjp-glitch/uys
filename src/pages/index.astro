@@ -8,22 +8,126 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 ---
 
 <BaseLayout title="uys.">
-	<h1>uys.</h1>
-	<p>中小の飲食店・温泉施設が、限られた予算と人手でも実践できる集客・マーケティングの情報を発信しています。</p>
+	<section class="hero">
+		<span class="eyebrow">MARKETING NOTES</span>
+		<h1>限られた予算と人手でも、<br />お客さんに届く発信を。</h1>
+		<p>
+			中小の飲食店・温泉施設が、日々の運営をしながらでも実践できる集客・マーケティングの知見をまとめています。
+		</p>
+	</section>
 
-	<ul style="list-style: none; padding: 0;">
+	<ul class="posts">
 		{posts.map((post) => (
-			<li style="margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #e4e3dc;">
-				<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`} style="font-size: 18px; font-weight: 700; text-decoration: none;">
-					{post.data.title}
+			<li>
+				<a class="card" href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>
+					<p class="date">
+						{post.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+					</p>
+					<h2>{post.data.title}</h2>
+					<p class="desc">{post.data.description}</p>
+					{post.data.tags.length > 0 && (
+						<p class="tags">
+							{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+						</p>
+					)}
+					<span class="read-more">続きを読む &rarr;</span>
 				</a>
-				<p style="color: #6b6a63; margin: 6px 0 0;">{post.data.description}</p>
-				<p style="color: #b4b3a8; font-size: 13px; margin: 4px 0 0;">
-					{post.data.pubDate.toLocaleDateString('ja-JP')}
-				</p>
 			</li>
 		))}
 	</ul>
 
 	{posts.length === 0 && <p>まだ記事がありません。近日公開予定です。</p>}
 </BaseLayout>
+
+<style>
+	.hero {
+		padding: 8px 0 48px;
+		border-bottom: 1px solid var(--hairline);
+		margin-bottom: 40px;
+	}
+	.eyebrow {
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		color: var(--accent);
+		margin-bottom: 18px;
+	}
+	.hero h1 {
+		font-family: var(--serif);
+		font-size: clamp(28px, 4.4vw, 42px);
+		line-height: 1.5;
+		font-weight: 800;
+		margin: 0 0 20px;
+	}
+	.hero p {
+		color: var(--ink-soft);
+		font-size: 16px;
+		max-width: 46ch;
+		margin: 0;
+	}
+
+	.posts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 18px;
+	}
+
+	.card {
+		display: block;
+		background: var(--surface);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow);
+		padding: 28px 30px;
+		text-decoration: none;
+		color: var(--ink);
+		transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+	}
+	.card:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-hover);
+		border-color: color-mix(in srgb, var(--accent) 35%, var(--hairline));
+	}
+
+	.date {
+		margin: 0 0 10px;
+		font-size: 13px;
+		color: var(--ink-faint);
+		letter-spacing: 0.02em;
+	}
+	.card h2 {
+		font-family: var(--serif);
+		font-size: 22px;
+		font-weight: 700;
+		margin: 0 0 10px;
+		line-height: 1.5;
+	}
+	.desc {
+		margin: 0 0 16px;
+		color: var(--ink-soft);
+		font-size: 15px;
+		line-height: 1.75;
+	}
+	.tags {
+		margin: 0 0 14px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.tag {
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--accent);
+		background: var(--accent-soft);
+		padding: 4px 11px;
+		border-radius: 999px;
+	}
+	.read-more {
+		font-size: 13px;
+		font-weight: 700;
+		color: var(--accent);
+	}
+</style>
